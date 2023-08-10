@@ -1,10 +1,10 @@
 import {writable} from "svelte/store";
 import {v4 as uuidv4} from "uuid"
 const store = () => {
-    let id = uuidv4()
 
 
-    const {subscribe, update, set} = writable([{id: '',name: ''}])
+
+    const {subscribe, update, set} = writable([])
     return {
         subscribe,
         /**
@@ -15,16 +15,14 @@ const store = () => {
          */
         append: (newTodo) => {
             update(value => [...value, newTodo])
-            console.log(newTodo.id)
         },
         /**
          * Assign the project to a list of employees.
-         * @param {Object} unwanted - The employees who are responsible for the project.
-         * @param {string} unwanted.id - The name of an employee.
-         * @param {string} unwanted.name - The employee's department.
+         * @param {string} unwanted - The id of the unwanted object.
          */
         remove: (unwanted)=> {
-            update(value => [...value, unwanted])
+            console.log(unwanted)
+            update(value => value.filter(item => item.id !== unwanted))
         },
         empty: ()=> {
             set([])
