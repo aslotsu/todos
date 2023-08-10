@@ -6,14 +6,17 @@
     
     let task = ''
 
-
 </script>
+
 <span class="header">Todo App- Alfred Lotsu </span>
 <div class="control">
     <div class="left">
         <label for="new-task">New Task</label>
-        <input type="text" id="new-task" name="new-task" bind:value={task}>
-        <button on:click={()=>todoStore.append({id: uuidv4().toString(),name: task})}>Append</button>
+        <input type="text" id="new-task" name="new-task" bind:value={task} placeholder="new">
+        <button on:click={()=>{
+        if (task){
+            todoStore.append({id: uuidv4().toString(),name: task})}
+    }}>Add New Todo</button>
 
     </div>
 
@@ -30,6 +33,17 @@
 </TodoList>
 
 <style>
+
+    .control input {
+        outline: none;
+        border: 2px solid palegreen;
+        background-color: transparent;
+        padding: 7px;
+        color: white;
+    }
+    .control input::placeholder {
+        color: white;
+    }
 
     span.header {
         background-color: yellowgreen;
@@ -53,7 +67,10 @@
     }
 
     .left {
+        /*border: 2px solid red;*/
+        width: 70%;
         display: flex;
+        /*justify-content: space-around;*/
         align-items: center;
         margin-left: 30px;
     }
@@ -76,7 +93,7 @@
         font-size: 20px;
         margin-left: 10px;
         border: 1px solid palegreen;
-        padding: 10px 40px;
+        padding: 10px 30px;
     }
 </style>
 

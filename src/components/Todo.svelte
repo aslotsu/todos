@@ -1,5 +1,6 @@
 <script>
 import {todoStore} from "../stores/stores.js";
+import {fly} from "svelte/transition";
 
 /**
  * @param {string} todo
@@ -8,7 +9,7 @@ export let todo
 </script>
 
 
-<div class="item" data-key={todo.id} role="button" tabindex="-3"   on:click={(event)=> console.log("swallow", event.target.dataset.key)}>
+<div out:fly={{y: -100}} class="item" data-key={todo.id} role="button" tabindex="-3"   on:click={(event)=> console.log("swallow", event.target.dataset.key)}>
 
     <span class="word">{todo.name}</span>
     <button on:click|stopPropagation={(event)=>{
