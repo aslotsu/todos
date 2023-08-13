@@ -20,17 +20,17 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
-        /*transition: scale 600ms ease;*/
+        transition: border 100ms ease;
 
     }
 
     div:not(:has(div)) {
-        scale: 0.9;
+    /*    scale: 0.9;*/
         border-bottom: 3px solid black;
         border-top: 1px solid transparent;
         border-right: 3px solid black;
         border-left: 1px solid transparent;
-
+    /**/
     }
 
 

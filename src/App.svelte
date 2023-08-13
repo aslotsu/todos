@@ -4,7 +4,7 @@
     import Todo from "./components/Todo.svelte";
     import TodoList from "./components/TodoList.svelte";
     import {flip} from "svelte/animate";
-    import {fade, fly} from "svelte/transition";
+    import {fade} from "svelte/transition";
     import Keyblock from "./components/Keyblock.svelte";
 
     let task = ''
@@ -32,16 +32,16 @@
 
 <TodoList >
     {#each $todoStore as todo (todo)}
-        <div in:fly={{duration: 400}}>
+        <div animate:flip={{duration: 400}}>
             <Todo  {todo}/>
         </div>
     {:else}
-        <h3 in:fade={{delay: 400, duration: 400}}>No todos yet</h3>
+        <h3 in:fade={{ duration: 200}}>No todos yet</h3>
     {/each}
 
 </TodoList>
 
-<Keyblock />
+<!--<Keyblock />-->
 
 <style>
 
