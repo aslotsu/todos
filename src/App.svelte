@@ -3,10 +3,19 @@
     import { v4 as uuidv4 } from 'uuid';
     import Todo from "./components/Todo.svelte";
     import TodoList from "./components/TodoList.svelte";
-    
+    import {flip} from "svelte/animate";
+    import {fade} from "svelte/transition";
+    import {tweened} from "svelte/motion";
+
     let task = ''
 
+    let safe = true
+    $: console.log(`now it is ${safe} that it is safe`)
+    let padding = tweened("15px")
+
 </script>
+
+
 
 <span class="header">Todo App- Alfred Lotsu </span>
 <div class="control">
@@ -16,7 +25,7 @@
         <button on:click={()=>{
         if (task){
             todoStore.append({id: uuidv4().toString(),name: task})}
-    }}>Add New Todo</button>
+    }}>Add New Todo </button>
 
     </div>
 
@@ -24,33 +33,41 @@
         <button on:click={()=>todoStore.empty()}>Empty</button>
     </div>
 </div>
-<TodoList>
+
+}
+
+<TodoList {padding}>
     {#each $todoStore as todo (todo)}
         <!--    will find the recommended way-->
 
-        <Todo {todo}/>
+        <div animate:flip={{duration: 400}}>
+            <Todo  {todo}/>
+        </div>
+    {:else}
+        <h3 in:fade={{delay: 400}}>No todos yet</h3>
     {/each}
+
 </TodoList>
 
 <style>
 
     .control input {
         outline: none;
-        border: 2px solid palegreen;
+        border: 2px solid black;
         background-color: transparent;
         padding: 7px;
-        color: white;
+        color: black;
     }
     .control input::placeholder {
-        color: white;
+        color: black;
     }
 
     span.header {
-        background-color: yellowgreen;
-        background-image: linear-gradient(white, wheat);
+        background-color: black;
         -webkit-background-clip: text;
+        background-clip: text;
         color: transparent;
-        font-size: 2rem;
+        font-size: 1.6rem;
         /*margin: 0 auto;*/
          text-align: center;
         width: 40vw;
@@ -60,7 +77,7 @@
 
     label {
         margin-right: 30px;
-        color: white;
+        color: black;
     }
     label + input {
         margin-right: 20px;
@@ -76,7 +93,7 @@
     }
     .control {
         width: 50vw;
-        border: 2px solid palegreen;
+        border: 5px solid black;
         border-radius: 15px;
         display: flex;
         /*margin-left: 20vw;*/
@@ -89,11 +106,22 @@
     .control button {
         background-color: transparent;
         outline: none;
-        color: white;
+        color: black;
         font-size: 20px;
         margin-left: 10px;
-        border: 1px solid palegreen;
+        border: 1px solid black;
         padding: 10px 30px;
     }
+
+
+    @media screen and (max-width: 1024px) {
+        span.header {
+            width: 60vw;
+            margin-left: 20vw;
+
+            /*color: black;*/
+        }
+    }
 </style>
+
 

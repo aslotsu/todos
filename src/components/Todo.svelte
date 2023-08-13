@@ -1,29 +1,35 @@
 <script>
 import {todoStore} from "../stores/stores.js";
 import {fly} from "svelte/transition";
+import {onMount} from "svelte";
 
 /**
  * @param {string} todo
  */
 export let todo
+let item;
+
+onMount(()=> {
+    console.log('item',item)
+})
 </script>
 
 
-<div out:fly={{y: -100}} class="item" data-key={todo.id} role="button" tabindex="-3"   on:click={(event)=> console.log("swallow", event.target.dataset.key)}>
+<button bind:this={item} out:fly={{y: -100}} in:fly={{x:-100}}  class="item" data-key={todo.id} tabindex="-3"  on:click={()=> console.log("swallow", item.dataset.key)}>
 
     <span class="word">{todo.name}</span>
-    <button on:click|stopPropagation={(event)=>{
-                todoStore.remove(event.target.parentNode.dataset.key)
-                console.log('hair',event.target.parentNode.dataset.key)}
+    <button on:click|stopPropagation={()=>{
+                todoStore.remove(item.dataset.key)
+                console.log('hair',item.dataset.key)}
                 }>Remove</button>
 
-</div>
+</button>
 <style>
     .item {
-        border: 3px solid white;
+        border: 3px solid black;
         padding: 0 40px;
         display: flex;
-        width: 400px;
+        width: 300px;
         height: 10vh;
         align-items: center;
         margin-bottom: 3vh;
@@ -34,11 +40,12 @@ export let todo
         border: 4px solid #ecc;
         border-radius: 6px;
         background-color: transparent;
-        color: white;
+        color: black;
         margin-left: 5vw;
     }
 
     .word {
-        color: white;
+        color: black;
+        font-size: 20px;
     }
 </style>
