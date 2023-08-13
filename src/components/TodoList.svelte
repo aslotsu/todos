@@ -1,13 +1,16 @@
-<script>
-    import {fade} from "svelte/transition";
- </script>
-<div in:fade={{delay:50}}  >
+
+<div>
     <slot></slot>
 </div>
 
 <style>
+
+
     div {
-        border: 3px solid black;
+        border-top: 3px solid black;
+        border-bottom: 1px solid transparent;
+        border-left: 3px solid black;
+        border-right: 1px solid transparent;
         padding: 30px;
         height: 100%;
         max-width: 1200px;
@@ -17,13 +20,17 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
+        /*transition: scale 600ms ease;*/
+
     }
 
     div:not(:has(div)) {
-        border: 3px solid rgb(238, 232, 170);
-        width: 40vw;
-        margin-left: 30vw;
-        padding: 10px;
+        scale: 0.9;
+        border-bottom: 3px solid black;
+        border-top: 1px solid transparent;
+        border-right: 3px solid black;
+        border-left: 1px solid transparent;
+
     }
 
 

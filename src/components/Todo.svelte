@@ -15,7 +15,8 @@ onMount(()=> {
 </script>
 
 
-<button bind:this={item} out:fly={{y: -100}} in:fly={{x:-100}}  class="item" data-key={todo.id} tabindex="-3"  on:click={()=> console.log("swallow", item.dataset.key)}>
+
+<button bind:this={item} out:fly={{y: -100, duration: 600}} in:fly={{x:-100}}  class="item" data-key={todo.id} tabindex="-3"  on:click={()=> console.log("swallow", item.dataset.key)}>
 
     <span class="word">{todo.name}</span>
     <button on:click|stopPropagation={()=>{

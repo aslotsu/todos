@@ -4,14 +4,10 @@
     import Todo from "./components/Todo.svelte";
     import TodoList from "./components/TodoList.svelte";
     import {flip} from "svelte/animate";
-    import {fade} from "svelte/transition";
-    import {tweened} from "svelte/motion";
+    import {fade, fly} from "svelte/transition";
+    import Keyblock from "./components/Keyblock.svelte";
 
     let task = ''
-
-    let safe = true
-    $: console.log(`now it is ${safe} that it is safe`)
-    let padding = tweened("15px")
 
 </script>
 
@@ -34,20 +30,18 @@
     </div>
 </div>
 
-}
-
-<TodoList {padding}>
+<TodoList >
     {#each $todoStore as todo (todo)}
-        <!--    will find the recommended way-->
-
-        <div animate:flip={{duration: 400}}>
+        <div in:fly={{duration: 400}}>
             <Todo  {todo}/>
         </div>
     {:else}
-        <h3 in:fade={{delay: 400}}>No todos yet</h3>
+        <h3 in:fade={{delay: 400, duration: 400}}>No todos yet</h3>
     {/each}
 
 </TodoList>
+
+<Keyblock />
 
 <style>
 
