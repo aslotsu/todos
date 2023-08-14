@@ -12,8 +12,12 @@ let item;
 onMount(()=> {
     console.log('item',item)
 })
-</script>
 
+import {setContext} from "svelte";
+import {key} from "../../context/context.js";
+
+setContext(key, "#23d997")
+</script>
 
 
 <button bind:this={item} out:fly={{y: -100, duration: 600}} in:fly={{x:-100}}  class="item" data-key={todo.id} tabindex="-3"  on:click={()=> console.log("swallow", item.dataset.key)}>
@@ -23,7 +27,6 @@ onMount(()=> {
                 todoStore.remove(item.dataset.key)
                 console.log('hair',item.dataset.key)}
                 }>Remove</button>
-
 </button>
 <style>
     .item {

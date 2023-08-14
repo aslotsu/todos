@@ -1,11 +1,11 @@
 <script>
-    import { todoStore } from "./stores/stores.js";
+    import { todoStore,} from "./stores/stores.js";
+    import {session} from "./stores/stores.js";
     import { v4 as uuidv4 } from 'uuid';
-    import Todo from "./components/Todo.svelte";
     import TodoList from "./components/TodoList.svelte";
     import {flip} from "svelte/animate";
     import {fade} from "svelte/transition";
-    import Keyblock from "./components/Keyblock.svelte";
+    import Todo from "./components/Todo.svelte";
 
     let task = ''
 
@@ -14,6 +14,13 @@
 
 
 <span class="header">Todo App- Alfred Lotsu </span>
+{#if $session ===1 }
+    <span>1 second since refresh</span>
+    {:else if $session === 0}
+            &nbsp
+    {:else }
+        <span>{$session} seconds since refresh</span>
+    {/if}
 <div class="control">
     <div class="left">
         <label for="new-task">New Task</label>

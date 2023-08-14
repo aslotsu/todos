@@ -1,7 +1,5 @@
-import {writable} from "svelte/store";
+import {readable, writable} from "svelte/store";
 const store = () => {
-
-
 
     const {subscribe, update, set} = writable([])
     return {
@@ -29,5 +27,13 @@ const store = () => {
 
     }
 }
+export const session = readable(0, (set)=> {
+    let count = 0
+    const interval = setInterval(()=> {
+        count++
+        set(count)
+    }, 1000)
+    return ()=> clearInterval(interval)
+})
 
 export const todoStore = store()
