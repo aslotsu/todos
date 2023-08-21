@@ -20,7 +20,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
-        transition: border 100ms ease;
+        transition: height, border .2s ease;
 
     }
 

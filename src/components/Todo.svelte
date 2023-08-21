@@ -23,12 +23,19 @@ setContext(key, "#23d997")
 <button bind:this={item} out:fly={{y: -100, duration: 600}} in:fly={{x:-100}}  class="item" data-key={todo.id} tabindex="-3"  on:click={()=> console.log("swallow", item.dataset.key)}>
 
     <span class="word">{todo.name}</span>
-    <button on:click|stopPropagation={()=>{
+    <button class="btn" on:click|stopPropagation={()=>{
                 todoStore.remove(item.dataset.key)
                 console.log('hair',item.dataset.key)}
-                }>Remove</button>
+                }/>
 </button>
 <style>
+    .btn {
+        background: url("../../public/btn.svg") no-repeat 50% 50%;
+        border: 0;
+        width: 150px;
+        height: 50px;
+        display: flex;
+    }
     .item {
         border: 3px solid black;
         padding: 0 40px;
